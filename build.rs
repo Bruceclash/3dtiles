@@ -30,7 +30,7 @@ fn build_win_msvc() {
     println!("cargo:rustc-link-lib=OpenThreads");
 }
 
-fn build_linux_unkonw() {
+fn build_linux_unknown() {
     cc::Build::new()
         .cpp(true)
         .flag("-std=c++11")
@@ -44,7 +44,7 @@ fn build_linux_unkonw() {
         .file("./src/GeoTransform.cpp")
         .compile("_3dtile");
     // -------------
-    println!("cargo:rustc-link-search=native=/usr/lib/x86_64-linux-gnu");
+    println!("cargo:rustc-link-search=native=/usr/lib/aarch64-linux-gnu");
     println!("cargo:rustc-link-search=native=./vcpkg/installed/x64-linux-release/lib");
     // -------------
     println!("cargo:rustc-link-lib=osg");
@@ -58,7 +58,7 @@ fn build_linux_unkonw() {
 fn main() {
     match env::var("TARGET") {
         Ok(val) => match val.as_str() {
-            "x86_64-unknown-linux-gnu" => build_linux_unkonw(),
+            "aarch64-unknown-linux-gnu" => build_linux_unknown(),
             "x86_64-pc-windows-msvc" => build_win_msvc(),
             &_ => {}
         },

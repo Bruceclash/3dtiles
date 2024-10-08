@@ -461,7 +461,7 @@ shp23dtile(const char* filename, int layer_id,
     for (auto item : items_array) {
         node* _node = (node*)item;
         char b3dm_file[512];
-        sprintf(b3dm_file, "%s\\tile\\%d\\%d", dest, _node->_z, _node->_x);
+        sprintf(b3dm_file, "%s/tile/%d/%d", dest, _node->_z, _node->_x);
         mkdirs(b3dm_file);
         // fix the box 
         {
@@ -519,7 +519,7 @@ shp23dtile(const char* filename, int layer_id,
             OGRFeature::DestroyFeature(poFeature);
         }
 
-        sprintf(b3dm_file, "%s\\tile\\%d\\%d\\%d.b3dm", dest, _node->_z, _node->_x, _node->_y);
+        sprintf(b3dm_file, "%s/tile/%d/%d/%d.b3dm", dest, _node->_z, _node->_x, _node->_y);
         std::string b3dm_buf = make_b3dm(v_meshes, true);
         write_file(b3dm_file, b3dm_buf.data(), b3dm_buf.size());
         // test
@@ -530,7 +530,7 @@ shp23dtile(const char* filename, int layer_id,
 
         char b3dm_name[512], tile_json_path[512];
         sprintf(b3dm_name,"./tile/%d/%d/%d.b3dm",_node->_z,_node->_x,_node->_y);
-        sprintf(tile_json_path, "%s\\tile\\%d\\%d\\%d.json", dest, _node->_z, _node->_x, _node->_y);
+        sprintf(tile_json_path, "%s/tile/%d/%d/%d.json", dest, _node->_z, _node->_x, _node->_y);
         double box_width = ( _node->_box.maxx - _node->_box.minx )  ;
         double box_height = ( _node->_box.maxy - _node->_box.miny ) ;
         const double pi = std::acos(-1);
